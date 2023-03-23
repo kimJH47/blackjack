@@ -17,7 +17,7 @@ public class Players {
         validName(playerNames);
         playerNames.forEach(name ->
                 this.players.add(
-                        new Player(name, new Hands(deck.drawFirst())))
+                        new Player(name, deck.drawFirst()))
         );
     }
 

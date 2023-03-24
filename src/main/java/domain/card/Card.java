@@ -23,6 +23,13 @@ public class Card {
         return cards;
     }
 
+    public int getRankScore() {
+        return rank.getRank();
+    }
+
+    public boolean isAce() {
+        return rank.isAce();
+    }
     @Override
     public String toString() {
         return "Card{" +

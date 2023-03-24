@@ -11,4 +11,12 @@ public class HandsStatusDto {
         this.cards = cards;
         this.handsStatus = handsStatus;
     }
+
+    public List<String> getCards() {
+        return cards;
+    }
+
+    public HandsStatus getHandsStatus() {
+        return handsStatus;
+    }
 }

@@ -16,5 +16,6 @@ class DeckTest {
         List<Card> cards = deck.drawFirst();
         //then
         assertThat(cards.size()).isEqualTo(2);
+        assertThat(cards.get(0).toString()).isNotEqualTo(cards.get(1).toString());
     }
 }

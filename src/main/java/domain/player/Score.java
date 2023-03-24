@@ -11,17 +11,13 @@ public class Score {
     }
 
     public static HandsStatus calc(int score, int aceCount) {
-        if (score == 11 && aceCount == 1) {
-            return HandsStatus.BLACK_JACK;
-        }
-        while (aceCount > 0 && score < 12) {
-            score += MAX_ACE_SCORE;
-            aceCount--;
-        }
+        int result = score + aceCount * MAX_ACE_SCORE;
         while (aceCount > 0) {
-            score += MIN_ACE_SCORE;
+            if (result > BLACK_JACK) {
+                result -= MAX_ACE_SCORE - MIN_ACE_SCORE;
+            }
             aceCount--;
         }
-        return HandsStatus.of(score);
+        return HandsStatus.of(result);
     }
 }

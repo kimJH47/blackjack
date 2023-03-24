@@ -15,7 +15,16 @@ public enum Rank {
     QUEEN(10),
     KING(10);
 
+    private final int rank;
     Rank(int rank) {
+        this.rank = rank;
+    }
 
+    public int getRank() {
+        return rank;
+    }
+
+    public boolean isAce() {
+        return rank == 1;
     }
 }

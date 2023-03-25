@@ -22,5 +22,9 @@ public class Player {
         return new PlayerStatusDto(name, hands.createHandsStatus());
     }
 
+    public boolean isSameName(String name) {
+        return this.name.equals(name);
+    }
+
 }
 

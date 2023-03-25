@@ -20,7 +20,8 @@ class HandsTest {
         List<Card> cards = List.of(new Card(Rank.ACE, Symbol.CLOVER), new Card(Rank.TWO, Symbol.CLOVER));
         //when
         //then
-        Hands hands = new Hands(cards);
+        Hands hands = new Hands();
+        hands.add(cards);
         HandsStatusDto handsStatus = hands.createHandsStatus();
         assertThat(handsStatus.getCards().size()).isEqualTo(2);
         assertThat(handsStatus.getHandsStatus()).isEqualTo(HandsStatus.NONE);
@@ -32,7 +33,8 @@ class HandsTest {
     void add() {
         //given
         List<Card> cards = List.of(new Card(Rank.ACE, Symbol.CLOVER), new Card(Rank.TWO, Symbol.CLOVER));
-        Hands hands = new Hands(cards);
+        Hands hands = new Hands();
+        hands.add(cards);
         //when
         Card card = new Card(Rank.TEN, Symbol.SPADE);
         HandsStatusDto actual = hands.add(List.of(card));
@@ -42,6 +44,5 @@ class HandsTest {
         assertThat(actual.getCards()).contains(card.toString());
 
     }
-
 
 }

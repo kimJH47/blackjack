@@ -33,6 +33,16 @@ public class Players {
         };
     }
 
+    public PlayerStatusDto addCard(String name) {
+        validName(List.of(name));
+        return players.stream()
+                .filter(player -> player.isSameName(name))
+                .limit(1)
+                .map(player -> player.add(deck.drawNormal()))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("해당이름의 참가자가 존재하지 않습니다."));
+    }
+
     private void validName(List<String> players) {
         for (String player : players) {
             if (!player.matches("^[a-zA-Z]*$")) {

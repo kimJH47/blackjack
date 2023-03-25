@@ -2,7 +2,9 @@ package domain;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import domain.player.dto.PlayerStatusDto;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,7 +18,7 @@ class PlayersTest {
         List<String> playerNames = List.of("asd", "poby", "glan");
         //when
         //then
-        assertThatCode(() -> players.add(playerNames))
+        assertThatCode(() -> players.addPlayer(playerNames))
                 .doesNotThrowAnyException();
     }
     @Test
@@ -27,7 +29,7 @@ class PlayersTest {
         List<String> playerNames = List.of("asd", "poby!@", "g.lan");
         //when
         //then
-        assertThatThrownBy(() -> players.add(playerNames))
+        assertThatThrownBy(() -> players.addPlayer(playerNames))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

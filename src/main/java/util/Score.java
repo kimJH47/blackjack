@@ -1,4 +1,6 @@
-package domain.player;
+package util;
+
+import domain.player.HandsStatus;
 
 public class Score {
 

@@ -3,6 +3,7 @@ package domain.player;
 
 import domain.card.Card;
 import domain.player.dto.HandsStatusDto;
+import util.Score;
 import java.util.ArrayList;
 
 import java.util.List;

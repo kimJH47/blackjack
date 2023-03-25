@@ -1,5 +1,7 @@
 package domain.player;
 
+import util.Score;
+
 public enum HandsStatus {
     NONE,
     BUST,

@@ -36,4 +36,47 @@ class PlayersTest {
         assertThatThrownBy(() -> players.addPlayer(playerNames))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("옮바른 형식의 플레이어 이름을 받아 해당 플레이어가 카드한장을 추가로 생성된다.")
+    public void add() throws Exception {
+        //given
+        Players players = new Players();
+        List<String> playerNames = List.of("asd", "poby", "glan");
+        players.addPlayer(playerNames);
+        //when
+        PlayerStatusDto actual = players.addCard("asd");
+        //then
+        assertThat(actual.getName()).isEqualTo("asd");
+        assertThat(actual.getHandsStatusDto().getCards().size()).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("이름형식에 맞지않으면 예외가 발생해야한다.")
+    public void add_ex1() throws Exception {
+        //given
+        Players players = new Players();
+        List<String> playerNames = List.of("asd", "poby", "glan");
+        players.addPlayer(playerNames);
+        //when
+        //then
+        assertThatThrownBy(() -> players.addCard("asd."))
+                .isInstanceOf(IllegalArgumentException.class);
+
+
+    }
+
+
+    @Test
+    @DisplayName("존재하지않는 이름을 받으면 예외가 발생해야한다.")
+    public void add_ex2() throws Exception {
+        //given
+        Players players = new Players();
+        List<String> playerNames = List.of("asd", "poby", "glan");
+        players.addPlayer(playerNames);
+        //when
+        //then
+        assertThatThrownBy(() -> players.addCard("pobi"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }

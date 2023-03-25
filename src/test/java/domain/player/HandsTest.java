@@ -45,4 +45,20 @@ class HandsTest {
 
     }
 
+    @Test
+    @DisplayName("들고있는 카드 상태에 맞는 HandStatusDto 가 반환되어야한다.")
+    void createHandsStatus() {
+        //given
+        List<Card> cards = List.of(new Card(Rank.ACE, Symbol.CLOVER), new Card(Rank.JACK, Symbol.CLOVER));
+        Hands hands = new Hands();
+        hands.add(cards);
+        //when
+        HandsStatusDto handsStatus = hands.createHandsStatus();
+        //then
+        assertThat(handsStatus.getCards().size()).isEqualTo(2);
+        assertThat(handsStatus.getHandsStatus()).isEqualTo(HandsStatus.BLACK_JACK);
+
+
+    }
+
 }

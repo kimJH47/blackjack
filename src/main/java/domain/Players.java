@@ -2,8 +2,11 @@ package domain;
 
 import domain.card.Deck;
 import domain.player.Player;
+import domain.player.dto.PlayerStatusDto;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Players {
 
@@ -14,12 +17,20 @@ public class Players {
         deck = Deck.create();
     }
 
-    public void add(List<String> playerNames) {
+    public List<PlayerStatusDto> addPlayer(List<String> playerNames) {
         validName(playerNames);
-        playerNames.forEach(name ->
-                this.players.add(
-                        new Player(name, deck.drawFirst()))
-        );
+        return playerNames.stream()
+                .map(addPlayerFunction())
+                .map(player -> player.add(Deck.create().drawFirst()))
+                .collect(Collectors.toList());
+    }
+
+    private Function<String, Player> addPlayerFunction() {
+        return name -> {
+            Player player = new Player(name);
+            players.add(player);
+            return player;
+        };
     }
 
     private void validName(List<String> players) {

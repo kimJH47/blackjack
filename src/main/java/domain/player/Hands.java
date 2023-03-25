@@ -12,8 +12,8 @@ import java.util.stream.Collectors;
 public class Hands {
     private List<Card> cards;
 
-    public Hands(List<Card> cards) {
-        this.cards = new ArrayList<>(cards);
+    public Hands() {
+        this.cards = new ArrayList<>();
     }
 
     public HandsStatusDto add(List<Card> cards) {
@@ -29,7 +29,7 @@ public class Hands {
     }
 
     private HandsStatus createScore() {
-        return Score.calc(sumExcludeAceScore(),sumAceCount());
+        return Score.calc(sumExcludeAceScore(), sumAceCount());
     }
 
     private int sumExcludeAceScore() {

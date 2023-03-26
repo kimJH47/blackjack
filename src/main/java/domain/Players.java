@@ -1,7 +1,6 @@
 package domain;
 
 import domain.card.Deck;
-import domain.card.ShuffleDeck;
 import domain.player.Dealer;
 import domain.player.Participant;
 import domain.player.Player;
@@ -25,7 +24,7 @@ public class Players {
         addDealer();
         return playerNames.stream()
                 .map(addPlayerFunction())
-                .map(player -> player.add(ShuffleDeck.create().drawFirst()))
+                .map(player -> player.add(shuffleDeck.drawFirst()))
                 .collect(Collectors.toList());
     }
 

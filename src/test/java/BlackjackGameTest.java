@@ -38,4 +38,20 @@ class BlackjackGameTest {
                 .isInstanceOf(IllegalArgumentException.class);
 
     }
+
+    @Test
+    @DisplayName("플레이어 이름을 인자로 받아 해당하는 이름의 플레이어의 카드를 추가시켜야한다.")
+    public void addCard() throws Exception {
+        //given
+        BlackjackGame blackjackGame = new BlackjackGame(ShuffleDeck.create());
+        String actual = "asd";
+        List<String> playerNames = List.of("kim", "jae", "tray", actual);
+        blackjackGame.addPlayer(playerNames);
+        //when
+        PlayerStatusDto expected = blackjackGame.addCard(actual);
+        //then
+        assertThat(expected.getName()).isEqualTo(actual);
+        assertThat(expected.getHandsStatusDto().getCards().size()).isEqualTo(3);
+
+    }
 }

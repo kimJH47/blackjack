@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import domain.card.ShuffleDeck;
 import domain.player.Dealer;
 import domain.player.dto.PlayerStatusDto;
 import java.util.List;
@@ -16,7 +17,7 @@ class PlayersTest {
     @DisplayName("올바른 형식의 이름 리스트가 오면 예외 없이 플레이어가 생성되어야한다.")
     public void crate() throws Exception {
         //given
-        Players players = new Players();
+        Players players = new Players(ShuffleDeck.create());
         List<String> playerNames = List.of("asd", "poby", "glan");
         //when
         //then
@@ -28,7 +29,7 @@ class PlayersTest {
     @DisplayName("player 생성시 올바르지않은 이름형식 리스트가 오면 예외가 발생해야함")
     public void create_ex() throws Exception {
         //given
-        Players players = new Players();
+        Players players = new Players(ShuffleDeck.create());
         List<String> playerNames = List.of("asd", "poby!@", "g.lan");
         //when
         //then
@@ -40,7 +41,7 @@ class PlayersTest {
     @DisplayName("옮바른 형식의 플레이어 이름을 받아 해당 플레이어가 카드한장을 추가로 생성된다.")
     public void add() throws Exception {
         //given
-        Players players = new Players();
+        Players players = new Players(ShuffleDeck.create());
         List<String> playerNames = List.of("asd", "poby", "glan");
         players.addPlayer(playerNames);
         //when
@@ -54,7 +55,7 @@ class PlayersTest {
     @DisplayName("이름형식에 맞지않으면 예외가 발생해야한다.")
     public void add_ex1() throws Exception {
         //given
-        Players players = new Players();
+        Players players = new Players(ShuffleDeck.create());
         List<String> playerNames = List.of("asd", "poby", "glan");
         players.addPlayer(playerNames);
         //when
@@ -70,7 +71,7 @@ class PlayersTest {
     @DisplayName("존재하지않는 이름을 받으면 예외가 발생해야한다.")
     public void add_ex2() throws Exception {
         //given
-        Players players = new Players();
+        Players players = new Players(ShuffleDeck.create());
         List<String> playerNames = List.of("asd", "poby", "glan");
         players.addPlayer(playerNames);
         //when
@@ -83,7 +84,7 @@ class PlayersTest {
     @DisplayName("게임에 참가하는 유저들의 상태가 리스트로 반환되어야한다.")
     public void getParticipantsStatus() {
         //given
-        Players players = new Players();
+        Players players = new Players(ShuffleDeck.create());
         List<String> playerNames = List.of("asd", "tray");
         players.addPlayer(playerNames);
         //when
@@ -92,15 +93,14 @@ class PlayersTest {
         Assertions.assertThat(actual.size()).isEqualTo(2);
         Assertions.assertThat(actual.stream()
                 .map(PlayerStatusDto::getName)
-                .allMatch(playerNames::contains)).isTrue()
-        ;
+                .allMatch(playerNames::contains)).isTrue();
 
     }
 
     @Test
     @DisplayName("딜러의 현재 상태가 반환되어야한다.")
     public void getDealersStatus() {
-        Players players = new Players();
+        Players players = new Players(ShuffleDeck.create());
         List<String> playerNames = List.of("asd", "tray", "kim", "gale");
         players.addPlayer(playerNames);
 

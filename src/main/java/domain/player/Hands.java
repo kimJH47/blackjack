@@ -23,7 +23,7 @@ public class Hands {
     }
 
     public HandsStatusDto createHandsStatus() {
-현        int score = calcScore();
+        int score = calcScore();
         return cards.stream()
                 .map(Card::toString)
                 .collect(Collectors.collectingAndThen(Collectors.toList(),

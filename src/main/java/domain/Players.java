@@ -69,7 +69,9 @@ public class Players {
     }
 
     private void addDealer() {
-        players.add(new Dealer());
+        Dealer dealer = new Dealer();
+        dealer.add(shuffleDeck.drawFirst());
+        players.add(dealer);
     }
 
     private Function<String, Player> addPlayerFunction() {

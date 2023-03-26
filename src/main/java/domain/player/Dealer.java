@@ -1,7 +1,7 @@
 package domain.player;
 
 public class Dealer extends Player {
-    private static final String NAME = "dealer";
+    public static final String NAME = "dealer";
     private static final int DEALER_MIN_SCORE = 17;
     public Dealer() {
         super(NAME);

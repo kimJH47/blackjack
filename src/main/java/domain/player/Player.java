@@ -26,6 +26,10 @@ public abstract class Player {
         return this.name.equals(name);
     }
 
+    protected int calcScore() {
+        return hands.createHandsStatus().getScore();
+    }
+
     public abstract boolean isDealer();
 }
 

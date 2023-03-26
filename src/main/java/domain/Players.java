@@ -1,6 +1,8 @@
 package domain;
 
 import domain.card.Deck;
+import domain.player.Dealer;
+import domain.player.Participant;
 import domain.player.Player;
 import domain.player.dto.PlayerStatusDto;
 import java.util.ArrayList;
@@ -19,18 +21,11 @@ public class Players {
 
     public List<PlayerStatusDto> addPlayer(List<String> playerNames) {
         validName(playerNames);
+        addDealer();
         return playerNames.stream()
                 .map(addPlayerFunction())
                 .map(player -> player.add(Deck.create().drawFirst()))
                 .collect(Collectors.toList());
-    }
-
-    private Function<String, Player> addPlayerFunction() {
-        return name -> {
-            Player player = new Player(name);
-            players.add(player);
-            return player;
-        };
     }
 
     public PlayerStatusDto addCard(String name) {
@@ -41,6 +36,18 @@ public class Players {
                 .map(player -> player.add(deck.drawNormal()))
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException("해당이름의 참가자가 존재하지 않습니다."));
+    }
+
+    private void addDealer() {
+        players.add(new Dealer());
+    }
+
+    private Function<String, Player> addPlayerFunction() {
+        return name -> {
+            Participant participant = new Participant(name);
+            players.add(participant);
+            return participant;
+        };
     }
 
     private void validName(List<String> players) {

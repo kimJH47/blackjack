@@ -17,4 +17,9 @@ public class BlackjackGame {
         playerStatusDtos.forEach(playerStatusDto -> dashBoard.put(playerStatusDto.getName()));
         return playerStatusDtos;
     }
+
+    public PlayerStatusDto addCard(String name) {
+        return players.addCard(name);
+    }
+
 }

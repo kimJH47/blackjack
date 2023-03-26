@@ -35,7 +35,7 @@ public class BlackjackGame {
         PlayerStatusDto dealer = players.getDealerStatusDto();
         List<PlayerStatusDto> participants = players.getParticipantsStatusDto();
         List<PlayerStatusDto> collect = participants.stream()
-                .map(playerStatusDto -> createResult().apply(playerStatusDto, dealer))
+                .map(participant -> createResult().apply(dealer, participant))
                 .collect(Collectors.toList());
 
         return new BlackJackResult(dealer, collect, dashBoard.toMap());
@@ -50,7 +50,10 @@ public class BlackjackGame {
     }
 
     private void drawDealerCardAndUpdate() {
-        players.addCard(Dealer.NAME);
+        PlayerStatusDto playerStatusDto = players.addCard(Dealer.NAME);
+        //refactoring
+        if (playerStatusDto.getScore() < 16) {
+            drawDealerCardAndUpdate();
+        }
     }
-
 }

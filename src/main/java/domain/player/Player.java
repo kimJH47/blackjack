@@ -4,7 +4,7 @@ import domain.card.Card;
 import domain.player.dto.PlayerStatusDto;
 import java.util.List;
 
-public class Player {
+public abstract class Player {
     private final String name;
     private final Hands hands;
 
@@ -26,5 +26,6 @@ public class Player {
         return this.name.equals(name);
     }
 
+    public abstract boolean isDealer();
 }
 

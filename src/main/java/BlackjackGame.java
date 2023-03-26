@@ -27,23 +27,24 @@ public class BlackjackGame {
         return players.addCard(name);
     }
 
-    public String processDealerAndResult() {
+    public BlackJackResult processDealerAndResult() {
         if (!players.isStayDealer()) {
             drawDealerCardAndUpdate();
         }
-
         PlayerStatusDto dealer = players.getDealerStatusDto();
         List<PlayerStatusDto> participants = players.getParticipantsStatusDto();
-        return participants.stream()
+        List<PlayerStatusDto> collect = participants.stream()
                 .map(playerStatusDto -> createResult().apply(playerStatusDto, dealer))
-                .collect(Collectors.joining("\n"));
+                .collect(Collectors.toList());
+
+        return new BlackJackResult(dealer, collect, dashBoard.toMap());
     }
 
-    private BiFunction<PlayerStatusDto, PlayerStatusDto, String> createResult() {
+    private BiFunction<PlayerStatusDto, PlayerStatusDto, PlayerStatusDto> createResult() {
         return (dealer, playerStatusDto) -> {
             Result result = Score.getResult(dealer, playerStatusDto);
             dashBoard.updateResult(playerStatusDto.getName(), result);
-            return String.format(playerStatusDto.toInfo() + " 결과: " + playerStatusDto.getScore() + "\n");
+            return playerStatusDto;
         };
     }
 

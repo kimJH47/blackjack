@@ -1,4 +1,5 @@
 import domain.Players;
+import domain.card.Deck;
 import domain.player.Dealer;
 import domain.player.dto.PlayerStatusDto;
 import java.util.List;
@@ -12,8 +13,8 @@ public class BlackjackGame {
     private final Players players;
     private final DashBoard dashBoard;
 
-    public BlackjackGame() {
-        players = new Players();
+    public BlackjackGame(Deck deck) {
+        players = new Players(deck);
         dashBoard = new DashBoard();
     }
 

@@ -1,6 +1,7 @@
 package domain;
 
 import domain.card.Deck;
+import domain.card.ShuffleDeck;
 import domain.player.Dealer;
 import domain.player.Participant;
 import domain.player.Player;
@@ -13,10 +14,10 @@ import java.util.stream.Collectors;
 public class Players {
 
     private List<Player> players = new ArrayList<>();
-    private final Deck deck;
+    private final Deck shuffleDeck;
 
-    public Players() {
-        deck = Deck.create();
+    public Players(Deck deck) {
+        shuffleDeck = deck;
     }
 
     public List<PlayerStatusDto> addPlayer(List<String> playerNames) {
@@ -24,7 +25,7 @@ public class Players {
         addDealer();
         return playerNames.stream()
                 .map(addPlayerFunction())
-                .map(player -> player.add(Deck.create().drawFirst()))
+                .map(player -> player.add(ShuffleDeck.create().drawFirst()))
                 .collect(Collectors.toList());
     }
 
@@ -33,7 +34,7 @@ public class Players {
         return players.stream()
                 .filter(player -> player.isSameName(name))
                 .limit(1)
-                .map(player -> player.add(deck.drawNormal()))
+                .map(player -> player.add(shuffleDeck.drawNormal()))
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException("해당이름의 참가자가 존재하지 않습니다."));
     }

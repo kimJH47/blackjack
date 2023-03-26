@@ -17,4 +17,8 @@ public class InputView {
         return playNames;
     }
 
+    public SelectType inputHitOrStay(String name) {
+        System.out.println("pobi는 한장의 카드를 더 받겠습니까?(예는 y, 아니오는 n)\n");
+        return SelectType.of(sc.nextLine());
+    }
 }

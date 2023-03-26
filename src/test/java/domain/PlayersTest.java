@@ -4,15 +4,17 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import domain.player.Dealer;
 import domain.player.dto.PlayerStatusDto;
 import java.util.List;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class PlayersTest {
     @Test
     @DisplayName("올바른 형식의 이름 리스트가 오면 예외 없이 플레이어가 생성되어야한다.")
-    public void crate() throws Exception{
+    public void crate() throws Exception {
         //given
         Players players = new Players();
         List<String> playerNames = List.of("asd", "poby", "glan");
@@ -21,9 +23,10 @@ class PlayersTest {
         assertThatCode(() -> players.addPlayer(playerNames))
                 .doesNotThrowAnyException();
     }
+
     @Test
     @DisplayName("player 생성시 올바르지않은 이름형식 리스트가 오면 예외가 발생해야함")
-    public void create_ex() throws Exception{
+    public void create_ex() throws Exception {
         //given
         Players players = new Players();
         List<String> playerNames = List.of("asd", "poby!@", "g.lan");
@@ -74,5 +77,36 @@ class PlayersTest {
         //then
         assertThatThrownBy(() -> players.addCard("pobi"))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("게임에 참가하는 유저들의 상태가 리스트로 반환되어야한다.")
+    public void getParticipantsStatus() {
+        //given
+        Players players = new Players();
+        List<String> playerNames = List.of("asd", "tray");
+        players.addPlayer(playerNames);
+        //when
+        List<PlayerStatusDto> actual = players.getParticipantsStatusDto();
+        //then
+        Assertions.assertThat(actual.size()).isEqualTo(2);
+        Assertions.assertThat(actual.stream()
+                .map(PlayerStatusDto::getName)
+                .allMatch(playerNames::contains)).isTrue()
+        ;
+
+    }
+
+    @Test
+    @DisplayName("딜러의 현재 상태가 반환되어야한다.")
+    public void getDealersStatus() {
+        Players players = new Players();
+        List<String> playerNames = List.of("asd", "tray", "kim", "gale");
+        players.addPlayer(playerNames);
+
+        PlayerStatusDto dealerStatusDto = players.getDealerStatusDto();
+
+        assertThat(dealerStatusDto.getName()).isEqualTo(Dealer.NAME);
+
     }
 }

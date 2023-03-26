@@ -3,13 +3,18 @@ import domain.player.dto.PlayerStatusDto;
 import java.util.List;
 
 public class BlackjackGame {
+
     private final Players players;
+    private final DashBoard dashBoard;
 
     public BlackjackGame() {
-        this.players = new Players();
-    }
-    public List<PlayerStatusDto> addPlayer(List<String> players) {
-       return this.players.addPlayer(players);
+        players = new Players();
+        dashBoard = new DashBoard();
     }
 
+    public List<PlayerStatusDto> addPlayer(List<String> players) {
+        List<PlayerStatusDto> playerStatusDtos = this.players.addPlayer(players);
+        playerStatusDtos.forEach(playerStatusDto -> dashBoard.put(playerStatusDto.getName()));
+        return playerStatusDtos;
+    }
 }

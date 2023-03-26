@@ -1,7 +1,5 @@
 package util;
 
-import domain.player.HandsStatus;
-
 public class Score {
 
     public final static int BLACK_JACK = 21;
@@ -12,7 +10,7 @@ public class Score {
 
     }
 
-    public static HandsStatus calc(int score, int aceCount) {
+    public static int calc(int score, int aceCount) {
         int result = score + aceCount * MAX_ACE_SCORE;
         while (aceCount > 0) {
             if (result > BLACK_JACK) {
@@ -20,6 +18,6 @@ public class Score {
             }
             aceCount--;
         }
-        return HandsStatus.of(result);
+        return result;
     }
 }

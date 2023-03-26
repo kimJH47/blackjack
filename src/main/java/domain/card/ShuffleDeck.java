@@ -1,6 +1,7 @@
 package domain.card;
 
 import java.util.ArrayDeque;
+import java.util.Collections;
 import java.util.List;
 import java.util.Queue;
 import java.util.stream.Collectors;
@@ -12,6 +13,7 @@ public class ShuffleDeck implements Deck{
     private final Queue<Card> cards;
 
     private ShuffleDeck(List<Card> cards) {
+        Collections.shuffle(cards);
         this.cards = new ArrayDeque<>(cards);
     }
     @Override

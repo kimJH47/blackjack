@@ -1,3 +1,4 @@
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import util.Result;
@@ -11,5 +12,9 @@ public class DashBoard {
 
     public void updateResult(String name, Result result) {
         dashBoard.put(name, dashBoard.get(name) + result.getPoint());
+    }
+
+    public Map<String,Integer> toMap() {
+        return Collections.unmodifiableMap(dashBoard);
     }
 }

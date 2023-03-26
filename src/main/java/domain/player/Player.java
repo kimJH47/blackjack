@@ -18,7 +18,7 @@ public abstract class Player {
         return createPlayerStatusDto();
     }
 
-    private PlayerStatusDto createPlayerStatusDto() {
+    public PlayerStatusDto createPlayerStatusDto() {
         return new PlayerStatusDto(name, hands.createHandsStatus());
     }
 

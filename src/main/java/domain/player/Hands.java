@@ -23,13 +23,18 @@ public class Hands {
     }
 
     public HandsStatusDto createHandsStatus() {
+현        int score = calcScore();
         return cards.stream()
                 .map(Card::toString)
                 .collect(Collectors.collectingAndThen(Collectors.toList(),
-                        strings -> new HandsStatusDto(strings, createScore())));
+                        cards -> new HandsStatusDto(cards, createHandStatus(score), score)));
     }
 
-    private HandsStatus createScore() {
+    private HandsStatus createHandStatus(int score) {
+        return HandsStatus.of(score);
+    }
+
+    private int calcScore() {
         return Score.calc(sumExcludeAceScore(), sumAceCount());
     }
 
@@ -45,4 +50,5 @@ public class Hands {
                 .filter(Card::isAce)
                 .count();
     }
+
 }

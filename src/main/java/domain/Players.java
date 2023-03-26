@@ -43,6 +43,22 @@ public class Players {
 
     }
 
+    public List<PlayerStatusDto> getParticipantsStatusDto() {
+        return players.stream()
+                .filter(player -> !player.isDealer())
+                .map(Player::createPlayerStatusDto)
+                .collect(Collectors.toList());
+    }
+
+    public PlayerStatusDto getDealerStatusDto() {
+        return players.stream()
+                .filter(Player::isDealer)
+                .limit(1)
+                .map(Player::createPlayerStatusDto)
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("딜러가 존재하지 않습니다."));
+    }
+
     private Dealer findDealer() {
         return players.stream()
                 .filter(Player::isDealer)

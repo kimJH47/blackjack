@@ -24,4 +24,16 @@ class PlayerTest {
         Assertions.assertThat(actual.getHandsStatusDto().getScore()).isEqualTo(18);
         Assertions.assertThat(actual.getHandsStatusDto().getHandsStatus()).isEqualTo(HandsStatus.NONE);
     }
+
+    @Test
+    @DisplayName("player 가 유저면 false 딜러면 true 를 반환해야한다.")
+    public void isDealer() {
+        //given
+        Dealer dealer = new Dealer();
+        Player participant = new Participant("kim");
+        //then
+        Assertions.assertThat(dealer.isDealer()).isTrue();
+        Assertions.assertThat(participant.isDealer()).isFalse();
+    }
+
 }

@@ -25,6 +25,7 @@ class HandsTest {
         HandsStatusDto handsStatus = hands.createHandsStatus();
         assertThat(handsStatus.getCards().size()).isEqualTo(2);
         assertThat(handsStatus.getHandsStatus()).isEqualTo(HandsStatus.NONE);
+        assertThat(handsStatus.getScore()).isEqualTo(13);
 
     }
 
@@ -41,6 +42,7 @@ class HandsTest {
         //then
         assertThat(actual.getHandsStatus()).isEqualTo(HandsStatus.NONE);
         assertThat(actual.getCards().size()).isEqualTo(3);
+        assertThat(actual.getScore()).isEqualTo(13);
         assertThat(actual.getCards()).contains(card.toString());
 
     }
@@ -56,6 +58,7 @@ class HandsTest {
         HandsStatusDto handsStatus = hands.createHandsStatus();
         //then
         assertThat(handsStatus.getCards().size()).isEqualTo(2);
+        assertThat(handsStatus.getScore()).isEqualTo(21);
         assertThat(handsStatus.getHandsStatus()).isEqualTo(HandsStatus.BLACK_JACK);
 
 

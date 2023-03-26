@@ -9,9 +9,7 @@ public class BlackjackGame {
         this.players = players;
     }
     public List<PlayerStatusDto> addPlayer(List<String> players) {
-        this.players.addPlayer(players);
-        return null;
-
+       return this.players.addPlayer(players);
     }
 
 }

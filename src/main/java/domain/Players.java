@@ -38,6 +38,20 @@ public class Players {
                 .orElseThrow(() -> new IllegalArgumentException("해당이름의 참가자가 존재하지 않습니다."));
     }
 
+    public boolean isStayDealer() {
+        return findDealer().isStay();
+
+    }
+
+    private Dealer findDealer() {
+        return players.stream()
+                .filter(Player::isDealer)
+                .limit(1)
+                .map(Dealer.class::cast)
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("딜러가 존재하지 않습니다."));
+    }
+
     private void addDealer() {
         players.add(new Dealer());
     }

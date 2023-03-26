@@ -27,6 +27,9 @@ public class Score {
         if (dealer.isBust() && participant.isBust()) {
             return Result.DEFAULT;
         }
+        if (participant.isBust()) {
+            return Result.LOSE;
+        }
         if (participant.isBlackJack() && !dealer.isBlackJack()) {
             return Result.WIN;
         }

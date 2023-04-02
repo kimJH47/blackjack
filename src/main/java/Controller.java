@@ -1,10 +1,9 @@
+import domain.BlackJackResult;
 import domain.player.dto.PlayerStatusDto;
 import java.util.List;
-import java.util.function.Function;
-import java.util.stream.Stream;
+import java.util.function.Supplier;
 import view.InputView;
 import view.OutputView;
-import view.SelectType;
 
 public class Controller {
     private final BlackjackGame blackjackGame;
@@ -18,30 +17,37 @@ public class Controller {
     }
 
     public void run() {
-        addPlayers();
-        stayOrHit();
-        result();
+        BlackJackResult result = play();
+        result(result);
     }
 
-    private void addPlayers() {
-        List<PlayerStatusDto> playerStatusDtos = blackjackGame.addPlayer(inputView.inputPlayers());
-        outputView.firstDrawResult(playerStatusDtos);
+    private BlackJackResult play() {
+        BlackJackResult blackJackResult = get(() -> blackjackGame.addPlayer(inputView.inputPlayers()));
+        outputView.firstDrawResult(blackJackResult);
+        return stayOrHit(blackJackResult.getParticipants());
     }
 
-    private void stayOrHit() {
-        //하는중
-        BlackJackResult blackJackResult = blackjackGame.processDealerAndResult();
-        Stream<SelectType> selectTypeStream = blackJackResult.getPariticipants().stream()
+    private <T> T get(Supplier<T> supplier) {
+        try {
+            return supplier.get();
+        } catch (IllegalArgumentException e) {
+            outputView.printException(e.getMessage());
+            return get(supplier);
+        }
+    }
+
+    private BlackJackResult stayOrHit(List<PlayerStatusDto> playerStatusDtos) {
+        playerStatusDtos.stream()
                 .map(PlayerStatusDto::getName)
-                .map(inputStayOrHit());
+                .filter(name -> get(() -> inputView.inputHitOrStay(name).isHit()))
+                .map(blackjackGame::addCard)
+                .forEach(outputView::hitResult);
+        return blackjackGame.processDealerAndResult();
+
     }
 
-    private Function<String, SelectType> inputStayOrHit() {
-        return inputView::inputHitOrStay;
-    }
-
-    private void result() {
-
+    private void result(BlackJackResult result) {
+        outputView.printResult(result);
     }
 }
 

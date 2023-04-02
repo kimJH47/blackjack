@@ -30,9 +30,6 @@ public class Card {
 
     @Override
     public String toString() {
-        return "Card{" +
-                "rank=" + rank +
-                ", symbol=" + symbol +
-                '}';
+        return rank.getRank() + " " + symbol.toString();
     }
 }

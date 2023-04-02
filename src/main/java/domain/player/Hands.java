@@ -2,7 +2,7 @@ package domain.player;
 
 
 import domain.card.Card;
-import domain.player.dto.HandsStatusDto;
+경import domain.dto.HandsStatusDto;
 import util.Score;
 import java.util.ArrayList;
 

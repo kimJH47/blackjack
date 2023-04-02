@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 public class Players {
 
-    private List<Player> players = new ArrayList<>();
+    private final List<Player> players = new ArrayList<>();
     private final Deck shuffleDeck;
 
     public Players(Deck deck) {
@@ -21,6 +21,7 @@ public class Players {
 
     public List<PlayerStatusDto> addPlayer(List<String> playerNames) {
         validName(playerNames);
+        validateDuplicateName(playerNames);
         addDealer();
         return playerNames.stream()
                 .map(addPlayerFunction())
@@ -87,6 +88,15 @@ public class Players {
             if (!player.matches("^[a-zA-Z]*$")) {
                 throw new IllegalArgumentException("이름은 영어만 입력가능합니다.");
             }
+        }
+    }
+
+    private void validateDuplicateName(List<String> playerNames) {
+        long unique = playerNames.stream()
+                .distinct()
+                .count();
+        if (playerNames.size() != unique) {
+            throw new IllegalArgumentException("중복된 이름이 존재합니다.");
         }
     }
 }

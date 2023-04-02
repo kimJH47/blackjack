@@ -27,11 +27,7 @@ public class Hands {
         return cards.stream()
                 .map(Card::toString)
                 .collect(Collectors.collectingAndThen(Collectors.toList(),
-                        cards -> new HandsStatusDto(cards, createHandStatus(score), score)));
-    }
-
-    private HandsStatus createHandStatus(int score) {
-        return HandsStatus.of(score);
+                        cards -> new HandsStatusDto(cards, score)));
     }
 
     private int calcScore() {

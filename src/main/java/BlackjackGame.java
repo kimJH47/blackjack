@@ -1,3 +1,4 @@
+import domain.BlackJackResult;
 import domain.Players;
 import domain.card.Deck;
 import domain.player.Dealer;
@@ -18,10 +19,10 @@ public class BlackjackGame {
         dashBoard = new DashBoard();
     }
 
-    public List<PlayerStatusDto> addPlayer(List<String> players) {
+    public BlackJackResult addPlayer(List<String> players) {
         List<PlayerStatusDto> playerStatusDtos = this.players.addPlayer(players);
         playerStatusDtos.forEach(playerStatusDto -> dashBoard.put(playerStatusDto.getName()));
-        return playerStatusDtos;
+        return new BlackJackResult(this.players.getDealerStatusDto(), playerStatusDtos, dashBoard.toMap());
     }
 
     public PlayerStatusDto addCard(String name) {

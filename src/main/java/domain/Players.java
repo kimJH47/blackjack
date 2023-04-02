@@ -4,7 +4,7 @@ import domain.card.Deck;
 import domain.player.Dealer;
 import domain.player.Participant;
 import domain.player.Player;
-import domain.player.dto.PlayerStatusDto;
+import domain.dto.PlayerStatusDto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;

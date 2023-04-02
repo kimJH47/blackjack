@@ -1,5 +1,4 @@
 import domain.BlackJackResult;
-import domain.player.dto.PlayerStatusDto;
 import java.util.List;
 import java.util.function.Supplier;
 import view.InputView;
@@ -24,7 +23,7 @@ public class Controller {
     private BlackJackResult play() {
         BlackJackResult blackJackResult = get(() -> blackjackGame.addPlayer(inputView.inputPlayers()));
         outputView.firstDrawResult(blackJackResult);
-        return stayOrHit(blackJackResult.getParticipants());
+        return stayOrHit(blackJackResult.getParticipantNames());
     }
 
     private <T> T get(Supplier<T> supplier) {
@@ -36,9 +35,8 @@ public class Controller {
         }
     }
 
-    private BlackJackResult stayOrHit(List<PlayerStatusDto> playerStatusDtos) {
+    private BlackJackResult stayOrHit(List<String> playerStatusDtos) {
         playerStatusDtos.stream()
-                .map(PlayerStatusDto::getName)
                 .filter(name -> get(() -> inputView.inputHitOrStay(name).isHit()))
                 .map(blackjackGame::addCard)
                 .forEach(outputView::hitResult);

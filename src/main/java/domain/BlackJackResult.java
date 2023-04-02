@@ -1,9 +1,10 @@
 package domain;
 
-import domain.player.dto.PlayerStatusDto;
+import domain.dto.PlayerStatusDto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class BlackJackResult {
 
@@ -20,8 +21,19 @@ public class BlackJackResult {
         return dealer;
     }
 
-    public List<PlayerStatusDto> getParticipants() {
-        return participants;
+    public List<String> getParticipantNames() {
+        return participants.stream()
+                .map(PlayerStatusDto::getName)
+                .collect(Collectors.toList());
+    }
+
+    public List<String> getPlayersInfo() {
+    return participants.stream().map(PlayerStatusDto::toInfo).collect(Collectors.toList());
+
+    }
+
+    public String getDealerInfo() {
+        return dealer.toInfo();
     }
 
     public Map<String, Integer> getDashBoard() {

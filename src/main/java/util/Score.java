@@ -1,12 +1,12 @@
 package util;
 
-import domain.player.dto.PlayerStatusDto;
+import domain.dto.PlayerStatusDto;
 
 public class Score {
 
-    public final static int BLACK_JACK = 21;
-    private final static int MAX_ACE_SCORE = 11;
-    private final static int MIN_ACE_SCORE = 1;
+    public static final int BLACK_JACK = 21;
+    private static final int MAX_ACE_SCORE = 11;
+    private static final int MIN_ACE_SCORE = 1;
 
     private Score() {
 

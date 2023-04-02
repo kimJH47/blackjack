@@ -1,3 +1,5 @@
+package domain;
+
 import domain.player.dto.PlayerStatusDto;
 import java.util.ArrayList;
 import java.util.List;
@@ -6,11 +8,11 @@ import java.util.Map;
 public class BlackJackResult {
 
     private final PlayerStatusDto dealer;
-    private final List<PlayerStatusDto> pariticipants;
+    private final List<PlayerStatusDto> participants;
     private final Map<String, Integer> dashBoard;
     public BlackJackResult(PlayerStatusDto dealer, List<PlayerStatusDto> participants, Map<String,Integer> dashBoard) {
         this.dealer = dealer;
-        this.pariticipants = new ArrayList<>(participants);
+        this.participants = new ArrayList<>(participants);
         this.dashBoard = dashBoard;
     }
 
@@ -18,8 +20,8 @@ public class BlackJackResult {
         return dealer;
     }
 
-    public List<PlayerStatusDto> getPariticipants() {
-        return pariticipants;
+    public List<PlayerStatusDto> getParticipants() {
+        return participants;
     }
 
     public Map<String, Integer> getDashBoard() {

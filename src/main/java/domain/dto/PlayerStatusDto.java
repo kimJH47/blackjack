@@ -22,6 +22,7 @@ public class PlayerStatusDto {
     public int getScore() {
         return handsStatusDto.getScore();
     }
+
     public String toInfo() {
         return String.format("%s : %s", name, handsStatusDto.getCards());
     }

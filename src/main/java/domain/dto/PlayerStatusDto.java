@@ -1,10 +1,10 @@
-package domain.player.dto;
+package domain.dto;
 
 import domain.player.HandsStatus;
 
 public class PlayerStatusDto {
-    private String name;
-    private HandsStatusDto handsStatusDto;
+    private final String name;
+    private final HandsStatusDto handsStatusDto;
 
     public PlayerStatusDto(String name, HandsStatusDto handsStatusDto) {
         this.name = name;

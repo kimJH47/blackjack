@@ -2,7 +2,7 @@ import domain.BlackJackResult;
 import domain.Players;
 import domain.card.Deck;
 import domain.player.Dealer;
-import domain.player.dto.PlayerStatusDto;
+import domain.dto.PlayerStatusDto;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;

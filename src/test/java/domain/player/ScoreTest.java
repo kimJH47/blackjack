@@ -1,9 +1,7 @@
 package domain.player;
 
-import static domain.player.HandsStatus.*;
-
-import domain.player.dto.HandsStatusDto;
-import domain.player.dto.PlayerStatusDto;
+import domain.dto.HandsStatusDto;
+import domain.dto.PlayerStatusDto;
 import java.util.stream.Stream;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -54,22 +52,22 @@ class ScoreTest {
     }
 
     private static Stream<Arguments> provideDealerAndParticipant() {
-        PlayerStatusDto dealer = create(Dealer.NAME, 19, NONE);
+        PlayerStatusDto dealer = create(Dealer.NAME, 19);
         return Stream.of(
-                Arguments.of(dealer, create("kim", 19, NONE), Result.DEFAULT),
-                Arguments.of(dealer, create("kim", 20, NONE), Result.WIN),
-                Arguments.of(dealer, create("kim", 21, BLACK_JACK), Result.WIN),
-                Arguments.of(dealer, create("kim", 22, BUST), Result.LOSE),
-                Arguments.of(create(Dealer.NAME, 17, NONE), create("kim", 19, NONE), Result.WIN),
-                Arguments.of(create(Dealer.NAME, 18, NONE), create("kim", 17, NONE), Result.LOSE),
-                Arguments.of(create(Dealer.NAME, 21, BLACK_JACK), create("kim", 21, BLACK_JACK), Result.DEFAULT),
-                Arguments.of(create(Dealer.NAME, 21, BUST), create("kim", 21, BUST), Result.DEFAULT)
+                Arguments.of(dealer, create("kim", 19), Result.DEFAULT),
+                Arguments.of(dealer, create("kim", 20), Result.WIN),
+                Arguments.of(dealer, create("kim", 21), Result.WIN),
+                Arguments.of(dealer, create("kim", 22), Result.LOSE),
+                Arguments.of(create(Dealer.NAME, 17), create("kim", 19), Result.WIN),
+                Arguments.of(create(Dealer.NAME, 18), create("kim", 17), Result.LOSE),
+                Arguments.of(create(Dealer.NAME, 21), create("kim", 21), Result.DEFAULT),
+                Arguments.of(create(Dealer.NAME, 21), create("kim", 21), Result.DEFAULT)
 
         );
     }
 
-    private static PlayerStatusDto create(String kim, int score, HandsStatus handsStatus) {
-        return new PlayerStatusDto(kim, new HandsStatusDto(null, handsStatus, score));
+    private static PlayerStatusDto create(String kim, int score) {
+        return new PlayerStatusDto(kim, new HandsStatusDto(null, score));
     }
 
 }

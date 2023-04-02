@@ -1,6 +1,7 @@
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import domain.BlackJackResult;
 import domain.card.Card;
 import domain.card.Deck;
 import domain.card.Rank;
@@ -26,9 +27,9 @@ class BlackjackGameTest {
         BlackjackGame blackjackGame = new BlackjackGame(ShuffleDeck.create());
         List<String> playerNames = List.of("kim", "jae", "tray");
         //when
-        List<PlayerStatusDto> actual = blackjackGame.addPlayer(playerNames);
+        BlackJackResult actual = blackjackGame.addPlayer(playerNames);
         //then
-        assertThat(actual.stream()
+        assertThat(actual.getParticipants().stream()
                 .map(PlayerStatusDto::getName)
                 .allMatch(playerNames::contains))
                 .isTrue();
@@ -85,7 +86,7 @@ class BlackjackGameTest {
         //when
         BlackJackResult blackJackResult = blackjackGame.processDealerAndResult();
         PlayerStatusDto dealer = blackJackResult.getDealer();
-        List<PlayerStatusDto> pariticipants = blackJackResult.getPariticipants();
+        List<PlayerStatusDto> pariticipants = blackJackResult.getParticipants();
         //then
         assertThat(dealer.getName()).isEqualTo(Dealer.NAME);
         assertThat(dealer.getScore()).isEqualTo(17);

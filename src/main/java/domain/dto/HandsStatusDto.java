@@ -1,16 +1,14 @@
-package domain.player.dto;
+package domain.dto;
 
 import domain.player.HandsStatus;
 import java.util.List;
 
 public class HandsStatusDto {
-    private List<String> cards;
-    private HandsStatus handsStatus;
-    private int score;
+    private final List<String> cards;
+    private final int score;
 
-    public HandsStatusDto(List<String> cards, HandsStatus handsStatus, int score) {
+    public HandsStatusDto(List<String> cards, int score) {
         this.cards = cards;
-        this.handsStatus = handsStatus;
         this.score = score;
     }
 
@@ -19,7 +17,7 @@ public class HandsStatusDto {
     }
 
     public HandsStatus getHandsStatus() {
-        return handsStatus;
+        return HandsStatus.of(score);
     }
 
     public int getScore() {

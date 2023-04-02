@@ -1,7 +1,7 @@
 package domain.player;
 
 import domain.card.Card;
-import domain.player.dto.PlayerStatusDto;
+import domain.dto.PlayerStatusDto;
 import java.util.List;
 
 public abstract class Player {

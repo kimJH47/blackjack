@@ -8,7 +8,7 @@ import domain.card.Rank;
 import domain.card.ShuffleDeck;
 import domain.card.Symbol;
 import domain.player.Dealer;
-import domain.player.dto.PlayerStatusDto;
+import domain.dto.PlayerStatusDto;
 import java.util.ArrayDeque;
 import java.util.List;
 import java.util.Queue;
@@ -29,10 +29,7 @@ class BlackjackGameTest {
         //when
         BlackJackResult actual = blackjackGame.addPlayer(playerNames);
         //then
-        assertThat(actual.getParticipants().stream()
-                .map(PlayerStatusDto::getName)
-                .allMatch(playerNames::contains))
-                .isTrue();
+        assertThat(playerNames.containsAll(actual.getParticipantNames())).isTrue();
 
     }
 
@@ -86,13 +83,15 @@ class BlackjackGameTest {
         //when
         BlackJackResult blackJackResult = blackjackGame.processDealerAndResult();
         PlayerStatusDto dealer = blackJackResult.getDealer();
-        List<PlayerStatusDto> pariticipants = blackJackResult.getParticipants();
+        List<String> participantNames = blackJackResult.getParticipantNames();
         //then
         assertThat(dealer.getName()).isEqualTo(Dealer.NAME);
         assertThat(dealer.getScore()).isEqualTo(17);
         assertThat(dealer.getHandsStatusDto().getCards().size()).isEqualTo(3);
-        assertThat(pariticipants.get(0).getScore()).isEqualTo(21);
-        assertThat(pariticipants.get(0).getName()).isEqualTo(actual);
+        assertThat(participantNames.get(0)).isEqualTo("kim");
+
+//        assertThat(pariticipants.get(0)).isEqualTo(21);
+//        assertThat(pariticipants.get(0).getName()).isEqualTo(actual);
 
     }
 

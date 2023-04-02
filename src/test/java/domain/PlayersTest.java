@@ -6,7 +6,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import domain.card.ShuffleDeck;
 import domain.player.Dealer;
-import domain.player.dto.PlayerStatusDto;
+import domain.dto.PlayerStatusDto;
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

@@ -3,7 +3,7 @@ package domain.player;
 import domain.card.Card;
 import domain.card.Rank;
 import domain.card.Symbol;
-import domain.player.dto.PlayerStatusDto;
+import domain.dto.PlayerStatusDto;
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

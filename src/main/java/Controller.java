@@ -22,8 +22,19 @@ public class Controller {
 
     private BlackJackResult play() {
         BlackJackResult blackJackResult = get(() -> blackjackGame.addPlayer(inputView.inputPlayers()));
-        outputView.firstDrawResult(blackJackResult);
+        outputView.firstDrawResult(
+                blackJackResult.getParticipantNames(),
+                blackJackResult.getPlayersInfo(),
+                blackJackResult.getDealerInfo());
         return stayOrHit(blackJackResult.getParticipantNames());
+    }
+
+    private BlackJackResult stayOrHit(List<String> playerNames) {
+        playerNames.stream()
+                .filter(name -> get(() -> inputView.inputHitOrStay(name).isHitSelect()))
+                .map(blackjackGame::addCard)
+                .forEach(playerStatusDto -> outputView.printInfo(playerStatusDto.toInfo()));
+        return blackjackGame.processDealerAndResult();
     }
 
     private <T> T get(Supplier<T> supplier) {
@@ -35,17 +46,8 @@ public class Controller {
         }
     }
 
-    private BlackJackResult stayOrHit(List<String> playerStatusDtos) {
-        playerStatusDtos.stream()
-                .filter(name -> get(() -> inputView.inputHitOrStay(name).isHit()))
-                .map(blackjackGame::addCard)
-                .forEach(outputView::hitResult);
-        return blackjackGame.processDealerAndResult();
-
-    }
-
     private void result(BlackJackResult result) {
-        outputView.printResult(result);
+        outputView.printResult(result.getPlayersInfo(), result.getDealerInfo(), result.getDashBoard());
     }
 }
 

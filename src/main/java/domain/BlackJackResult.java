@@ -28,7 +28,9 @@ public class BlackJackResult {
     }
 
     public List<String> getPlayersInfo() {
-    return participants.stream().map(PlayerStatusDto::toInfo).collect(Collectors.toList());
+    return participants.stream()
+            .map(PlayerStatusDto::toInfo)
+            .collect(Collectors.toList());
 
     }
 

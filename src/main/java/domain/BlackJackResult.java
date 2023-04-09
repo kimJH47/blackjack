@@ -11,14 +11,11 @@ public class BlackJackResult {
     private final PlayerStatusDto dealer;
     private final List<PlayerStatusDto> participants;
     private final Map<String, Integer> dashBoard;
-    public BlackJackResult(PlayerStatusDto dealer, List<PlayerStatusDto> participants, Map<String,Integer> dashBoard) {
+
+    public BlackJackResult(PlayerStatusDto dealer, List<PlayerStatusDto> participants, Map<String, Integer> dashBoard) {
         this.dealer = dealer;
         this.participants = new ArrayList<>(participants);
         this.dashBoard = dashBoard;
-    }
-
-    public PlayerStatusDto getDealer() {
-        return dealer;
     }
 
     public List<String> getParticipantNames() {
@@ -28,9 +25,9 @@ public class BlackJackResult {
     }
 
     public List<String> getPlayersInfo() {
-    return participants.stream()
-            .map(PlayerStatusDto::toInfo)
-            .collect(Collectors.toList());
+        return participants.stream()
+                .map(PlayerStatusDto::toInfo)
+                .collect(Collectors.toList());
 
     }
 

@@ -1,7 +1,5 @@
 package view;
 
-import domain.BlackJackResult;
-import domain.dto.PlayerStatusDto;
 import java.util.List;
 import java.util.Map;
 
@@ -9,22 +7,20 @@ public class OutputView {
 
     // private static final String LINE_SEPARATOR = System.lineSeparator();
 
-    public void firstDrawResult(BlackJackResult blackJackResult) {
-        System.out.printf("딜러와 %s 에게 카드 2장씩 나누어 주었습니다.\n",
-                formattingPlayerNames(blackJackResult.getParticipantNames()));
-        System.out.println(blackJackResult.getDealerInfo());
-        List<String> playersInfo = blackJackResult.getPlayersInfo();
-        playersInfo.forEach(System.out::println);
+    public void firstDrawResult(List<String> playerNames, List<String> playerInfos, String dealerInfo) {
+        System.out.printf("딜러와 %s 에게 카드 2장씩 나누어 주었습니다.\n", formattingPlayerNames(playerNames));
+        printInfo(dealerInfo);
+        playerInfos.forEach(this::printInfo);
     }
 
-    public void hitResult(PlayerStatusDto playerStatusDto) {
-        System.out.println(playerStatusDto.toInfo());
+    public void printInfo(String info) {
+        System.out.println(info);
     }
 
-    public void printResult(BlackJackResult result) {
-        System.out.println(result.getDealer().toInfo());
-        result.getParticipantNames().forEach(System.out::println);
-        Map<String, Integer> dashBoard = result.getDashBoard();
+    public void printResult(List<String> playerInfos, String dealerInfo, Map<String, Integer> dashBoard) {
+        System.out.println("결과----------------");
+        printInfo(dealerInfo);
+        playerInfos.forEach(this::printInfo);
         System.out.println(dashBoard);
     }
 

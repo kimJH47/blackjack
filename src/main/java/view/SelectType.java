@@ -21,7 +21,7 @@ public enum SelectType {
         throw new IllegalArgumentException("y 또는 n 을 입력해야합니다.");
     }
 
-    public boolean isHit() {
+    public boolean isHitSelect() {
         return select.equals("y");
     }
 }

@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 
 public class Hands {
-    private List<Card> cards;
+    private final List<Card> cards;
 
     public Hands() {
         this.cards = new ArrayList<>();
@@ -31,7 +31,7 @@ public class Hands {
     }
 
     private int calcScore() {
-        return Score.calc(sumExcludeAceScore(), sumAceCount());
+        return Score.calculate(sumExcludeAceScore(), sumAceCount());
     }
 
     private int sumExcludeAceScore() {

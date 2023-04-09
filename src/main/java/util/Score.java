@@ -12,7 +12,7 @@ public class Score {
 
     }
 
-    public static int calc(int score, int aceCount) {
+    public static int calculate(int score, int aceCount) {
         int result = score + aceCount * MAX_ACE_SCORE;
         while (aceCount > 0) {
             if (result > BLACK_JACK) {

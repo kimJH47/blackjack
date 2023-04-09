@@ -19,7 +19,7 @@ class ScoreTest {
     public void create(int sum, int aceCount, int expected) throws Exception {
         //given
         //when
-        int actual = Score.calc(sum, aceCount);
+        int actual = Score.calculate(sum, aceCount);
         //then
         Assertions.assertThat(actual).isEqualTo(expected);
     }

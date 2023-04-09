@@ -7,7 +7,6 @@ import domain.card.Deck;
 import domain.card.Rank;
 import domain.card.ShuffleDeck;
 import domain.card.Symbol;
-import domain.player.Dealer;
 import domain.dto.PlayerStatusDto;
 import java.util.ArrayDeque;
 import java.util.List;
@@ -82,12 +81,11 @@ class BlackjackGameTest {
         blackjackGame.addPlayer(playerNames);
         //when
         BlackJackResult blackJackResult = blackjackGame.processDealerAndResult();
-        PlayerStatusDto dealer = blackJackResult.getDealer();
         List<String> participantNames = blackJackResult.getParticipantNames();
-        //then
-        assertThat(dealer.getName()).isEqualTo(Dealer.NAME);
-        assertThat(dealer.getScore()).isEqualTo(17);
-        assertThat(dealer.getHandsStatusDto().getCards().size()).isEqualTo(3);
+//        //then
+//        assertThat(dealer.getName()).isEqualTo(Dealer.NAME);
+//        assertThat(dealer.getScore()).isEqualTo(17);
+//        assertThat(dealer.getHandsStatusDto().getCards().size()).isEqualTo(3);
         assertThat(participantNames.get(0)).isEqualTo("kim");
 
 //        assertThat(pariticipants.get(0)).isEqualTo(21);

@@ -1,7 +1,5 @@
 package util;
 
-import domain.dto.PlayerStatusDto;
-
 public class Score {
 
     public static final int BLACK_JACK = 21;
@@ -23,19 +21,7 @@ public class Score {
         return result;
     }
 
-    public static Result getResult(PlayerStatusDto dealer, PlayerStatusDto participant) {
-        if (dealer.isBust() && participant.isBust()) {
-            return Result.DEFAULT;
-        }
-        if (participant.isBust()) {
-            return Result.LOSE;
-        }
-        if (participant.isBlackJack() && !dealer.isBlackJack()) {
-            return Result.WIN;
-        }
-        int dealerScore = dealer.getScore();
-        int participantScore = participant.getScore();
-
+    public static Result getResult(int dealerScore, int participantScore) {
         if (participantScore == dealerScore) {
             return Result.DEFAULT;
         }

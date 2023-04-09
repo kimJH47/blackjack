@@ -30,7 +30,7 @@ class ScoreTest {
     public void result(PlayerStatusDto dealer, PlayerStatusDto participant, Result expected) throws Exception {
         //given
         //when
-        Result actual = Score.getResult(dealer, participant);
+        Result actual = Score.getResult(dealer.getScore(), participant.getScore());
         //then
         Assertions.assertThat(actual).isEqualTo(expected);
     }

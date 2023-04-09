@@ -44,7 +44,7 @@ public class BlackjackGame {
 
     private BiFunction<PlayerStatusDto, PlayerStatusDto, PlayerStatusDto> createResult() {
         return (dealer, playerStatusDto) -> {
-            Result result = Score.getResult(dealer, playerStatusDto);
+            Result result = Score.getResult(dealer.getScore(), playerStatusDto.getScore());
             dashBoard.updateResult(playerStatusDto.getName(), result);
             return playerStatusDto;
         };

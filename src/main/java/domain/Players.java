@@ -29,6 +29,20 @@ public class Players {
                 .collect(Collectors.toList());
     }
 
+    private void addDealer() {
+        Dealer dealer = new Dealer();
+        dealer.add(shuffleDeck.drawFirst());
+        players.add(dealer);
+    }
+
+    private Function<String, Player> addPlayerFunction() {
+        return name -> {
+            Participant participant = new Participant(name);
+            players.add(participant);
+            return participant;
+        };
+    }
+
     public PlayerStatusDto addCard(String name) {
         validName(List.of(name));
         return players.stream()
@@ -42,6 +56,15 @@ public class Players {
     public boolean isStayDealer() {
         return findDealer().isStay();
 
+    }
+
+    private Dealer findDealer() {
+        return players.stream()
+                .filter(Player::isDealer)
+                .limit(1)
+                .map(Dealer.class::cast)
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("딜러가 존재하지 않습니다."));
     }
 
     public List<PlayerStatusDto> getParticipantsStatusDto() {
@@ -58,29 +81,6 @@ public class Players {
                 .map(Player::createPlayerStatusDto)
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException("딜러가 존재하지 않습니다."));
-    }
-
-    private Dealer findDealer() {
-        return players.stream()
-                .filter(Player::isDealer)
-                .limit(1)
-                .map(Dealer.class::cast)
-                .findAny()
-                .orElseThrow(() -> new IllegalArgumentException("딜러가 존재하지 않습니다."));
-    }
-
-    private void addDealer() {
-        Dealer dealer = new Dealer();
-        dealer.add(shuffleDeck.drawFirst());
-        players.add(dealer);
-    }
-
-    private Function<String, Player> addPlayerFunction() {
-        return name -> {
-            Participant participant = new Participant(name);
-            players.add(participant);
-            return participant;
-        };
     }
 
     private void validName(List<String> players) {
